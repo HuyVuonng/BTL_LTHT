@@ -1,9 +1,10 @@
 .MODEL small
 .STACK 100h
 .DATA
-    msg  db 'Nhan 0 de thoat:$'
+    msg  db 'Nhan phim bat ki de thoat:$'
 
 .CODE
+
     CONTAINER:  
                 mov ax, @data
                 mov ds, ax
@@ -51,15 +52,14 @@
 
                 mov ah,01h
                 int 21h
-                sub al,'0'
-                cmp al,0
+                
                 mov ah, 00
                 mov al,02
                 int 10h
                 mov ah, 4bh
                 int 21h
-  
-
+    ; call Clear
+                
     ;   Return to DOs
               
                 mov ah, 4ch
