@@ -8,7 +8,7 @@ include LIB1.ASM
    msgMin         db 10,13,'Gia tri nho nhat: $'
    cach           db ' $'
    min            dw ?
-   datainput      db 100 dup('$')
+   datainput      dw 200 dup(0)
    nextWord       db ?
    slPt           dw 0
    dem            db 0
@@ -24,51 +24,34 @@ include LIB1.ASM
               mov        cx, ax
               mov        slPt, ax
               mov        si,0
-              lea        si, datainput
    NhapData:  
-              
-              
    ; hiên thông báo nhập mảng
               HienString msgNhap
               call       VAO_SO_N
-              mov        datainput[si], al   ;covert to number
-              inc        si
+              mov        datainput[si], ax   ;covert to number
+              add        si,2                ;cac phan tu cach nhau 2byte de du dung luong
               loop       NhapData
-   resetSi:   
-              mov        si,0
-              lea        si, datainput
 
+              mov        ax, datainput[0]    ;dua pt dau tien cua mang vao ax
               HienString msgHien
-              mov        cx,slPt
-              mov        al, datainput[si]
-              and        ax, 0ffh            ; xoa ah
-              mov        min , ax
+   ; and ax, 0ffh ; xoa ah
+              mov        min , ax            ; dua ax chua gt cua phan tu dau tien vao lam so nho nhat
+              call       reset               ; reset si
 
    HienDuLieu:
    ; hiển thi dữ liệu vừa nhập
-               
-              mov        al,datainput[si]
-              inc        si
-              and        ax, 0ffh            ; xoa ah
+              mov        ax,datainput[si]
+              add        si,2
               call       HIEN_SO_N
-
               HienString cach
               loop       HienDuLieu
-                
-
-              mov        si,0
-              lea        si, datainput
-              mov        cx,slPt
-
-
+              call       reset
 
    FindMin:   
-              mov        al, datainput[si]
-              inc        si
-              and        ax, 0ffh            ; xoa ah
+              mov        ax, datainput[si]
+              add        si,2
               cmp        min,ax
               jg         addmin
-
               loop       FindMin
               jmp        Showmin
 
@@ -76,15 +59,21 @@ include LIB1.ASM
               dec        cx
               mov        min, ax
               and        cx,cx
-
               jnz        FindMin
+
    Showmin:   
               HienString msgMin
               mov        ax, min
               call       HIEN_SO_N
+
    Exit:      
               mov        ah, 4ch
               int        21h
               include    LIB2.ASM
 
+reset PROC
+              mov        si,0
+              mov        cx,slPt
+              ret
+reset ENDP
 end CONTAINER
