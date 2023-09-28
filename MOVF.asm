@@ -12,31 +12,35 @@ INCLUDE lib1.asm
               db ?
     file_name db 50 dup(?)
 .CODE
-    PS:       
-              mov        ax,@data
-              mov        ds,ax
-    L_TM0:    
-              CLRSCR
-              HienString tm               ; Hiện thông báo tm
-              lea        dx,buff          ; Vào tên thư mục cần tạo
-              call       GET_FILE_NAME
-              lea        dx,file_name
-              mov        ah,3bh
-              int        21h
-              jnc        L_TM1            ; Nếu bit cờ CF=0 thì nhảy đến L_TM1,
-              Hienstring Err_MD           ; còn CF=1 thì hiện thông báo lỗi
-              jmp        EXIT_TM
-    L_TM1:    
-              Hienstring Suc_MD           ; Hiện thông báo thành công
-    Exit_TM:  
-              Hienstring tieptuc          ; Hiện thông báo tieptuc
-              mov        ah,1             ; Chò 1 ký tự từ bàn phím
-              int        21h
-              cmp        al,'c'           ;Ký tự vào có phải 'c';
-              jne        Thoat_TTM        ; Không phải 'c' thì nhảy đế Thoat_TM,
-              jmp        L_TM0            ; còn đúng là 'c' thì nhảy về L_TM0
-    Thoat_TTM:
-              mov        ah,4ch           ; Về DOS
-              int        21h
-              INCLUDE    lib3.asm         ; lib3.asm chứa CT con GET_DIR_NAME
+             PUBLIC     @MOVEF$qv
+    PS:      
+@MOVEF$qv PROC
+             mov        ax,@data
+             mov        ds,ax
+    LTM0:    
+             CLRSCR
+             HienString tm               ; Hiện thông báo tm
+             lea        dx,buff          ; Vào tên thư mục cần tạo
+             call       GET_FILE_NAME
+             lea        dx,file_name
+             mov        ah,3bh
+             int        21h
+             jnc        LTM1             ; Nếu bit cờ CF=0 thì nhảy đến LTM1,
+             HienString Err_MD           ; còn CF=1 thì hiện thông báo lỗi
+             jmp        ExitTM
+    LTM1:    
+             HienString Suc_MD           ; Hiện thông báo thành công
+    ExitTM:  
+             HienString tieptuc          ; Hiện thông báo tieptuc
+             mov        ah,1             ; Chò 1 ký tự từ bàn phím
+             int        21h
+             cmp        al,'c'           ;Ký tự vào có phải 'c';
+             jne        ThoatTTM         ; Không phải 'c' thì nhảy đế Thoat_TM,
+             jmp        LTM0             ; còn đúng là 'c' thì nhảy về LTM0
+    ThoatTTM:
+    ;  mov        ah,4ch           ; Về DOS
+    ;  int        21h
+             ret
+             INCLUDE    lib3.asm         ; lib3.asm chứa CT con GET_DIR_NAME
+@MOVEF$qv ENDP
 END PS
