@@ -20,6 +20,9 @@ include LIB1.asm
 @TimMin$qv PROC
          mov        ax,@data      ;dua phan dia chi segment cua vung nho
          mov        ds,ax         ; cap phat cho bien vao DS
+         push       CX
+         push       bx            ;
+         push       ax
     L0:  
          CLRSCR                   ;    xoa man hinh
          HienString M1            ; hien xau M1
@@ -28,9 +31,6 @@ include LIB1.asm
          mov        cx,ax         ;cx=s;tp chi so vong lap
          lea        bx,a          ; bx tro offset den o nho chua a[0]
          mov        i,0           ;           ;chi so (luc dau la 0)
-  
- 
- 
     ; VONG lap nhan cac so cua day dua vao mang a
     L1:  HienString M2            ;      hien xau M2 (a'[')
          mov        ax,i          ;            dia chi so vao AX
@@ -71,7 +71,8 @@ include LIB1.asm
          loop       L3            ; vong lap nhan cac so va so sanh
          call       HIEN_SO_N     ; Hien so lon nhat cua day
   
-    L5:  HienString M6
+    L5:  
+         HienString M6
          mov        ah,1          ; Chò 1 ký tự từ bàn phím
          int        21h
          cmp        al,'c'        ;Ký tự vào có phải 'c';
@@ -79,9 +80,10 @@ include LIB1.asm
          jmp        L0
   
     exit:
+         pop        CX
+         pop        bx            ;
+         pop        ax
          ret
-            
-       
          include    LIB2.asm
 @TimMin$qv ENDP
 end PS
