@@ -45,7 +45,7 @@ INCLUDE lib1.asm
     ;  mov        ah,4ch           ; Về DOS
     ;  pop        DX
     ;  pop        CX
-             mov        ah, 00
+             mov        ah, 00h
              mov        al,02
              int        10h
     ;  mov        ah, 4bh

@@ -60,10 +60,10 @@
                 mov    ah,01h
                 int    21h
                 
-                mov    ah, 0
+                mov    ah, 00h
                 mov    al,02
                 int    10h
-                mov    ah, 4bh
+                mov    ah, 4dh
                 int    21h
     ; call Clear
                 
