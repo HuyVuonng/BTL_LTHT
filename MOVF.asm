@@ -17,6 +17,9 @@ INCLUDE lib1.asm
 @MOVEF$qv PROC
              mov        ax,@data
              mov        ds,ax
+             xor        ax,ax
+             xor        bx,bx
+             xor        dx,dx
     LTM0:    
              CLRSCR
              HienString tm               ; Hiện thông báo tm
@@ -39,7 +42,7 @@ INCLUDE lib1.asm
              jmp        LTM0             ; còn đúng là 'c' thì nhảy về LTM0
     ThoatTTM:
     ;  mov        ah,4ch           ; Về DOS
-    ;  int        21h
+             
              ret
              INCLUDE    lib3.asm         ; lib3.asm chứa CT con GET_DIR_NAME
 @MOVEF$qv ENDP

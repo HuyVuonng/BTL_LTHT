@@ -11,6 +11,10 @@
 @DRAW$qv PROC
                 mov    ax, @data
                 mov    ds, ax
+    ; push   CX
+                push   bx            ;
+                push   ax
+                
               
     ; Draw
     ; setup
@@ -67,6 +71,9 @@
               
     ; mov    ah, 4ch
     ; int    21h
+    ; pop    CX
+                pop    bx            ;
+                pop    ax
                 ret
 @DRAW$qv ENDP
 end CONTAINER
