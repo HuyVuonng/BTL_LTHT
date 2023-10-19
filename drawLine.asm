@@ -60,7 +60,7 @@
                 mov    ah,01h
                 int    21h
                 
-                mov    ah, 00
+                mov    ah, 0
                 mov    al,02
                 int    10h
                 mov    ah, 4bh

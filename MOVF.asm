@@ -15,11 +15,12 @@ INCLUDE lib1.asm
              PUBLIC     @MOVEF$qv
     PS:      
 @MOVEF$qv PROC
+             push       AX
+             push       BX
+    ;  push       CX
+    ;  push       DX
              mov        ax,@data
              mov        ds,ax
-             xor        ax,ax
-             xor        bx,bx
-             xor        dx,dx
     LTM0:    
              CLRSCR
              HienString tm               ; Hiện thông báo tm
@@ -42,7 +43,16 @@ INCLUDE lib1.asm
              jmp        LTM0             ; còn đúng là 'c' thì nhảy về LTM0
     ThoatTTM:
     ;  mov        ah,4ch           ; Về DOS
-             
+    ;  pop        DX
+    ;  pop        CX
+             mov        ah, 00
+             mov        al,02
+             int        10h
+    ;  mov        ah, 4bh
+    ;  int        21h
+             pop        BX
+             pop        AX
+            
              ret
              INCLUDE    lib3.asm         ; lib3.asm chứa CT con GET_DIR_NAME
 @MOVEF$qv ENDP
