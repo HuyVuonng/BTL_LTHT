@@ -20,7 +20,7 @@ include LIB1.asm
 @TimMin$qv PROC
           mov        ax,@data       ;dua phan dia chi segment cua vung nho
           mov        ds,ax          ; cap phat cho bien vao DS
-     ; push       CX
+          push       CX
           push       bx             ;
           push       ax
           
@@ -81,7 +81,7 @@ include LIB1.asm
           jmp        L0
   
      exit:
-     ; pop        CX
+          pop        CX
           pop        bx             ;
           pop        ax
           ret

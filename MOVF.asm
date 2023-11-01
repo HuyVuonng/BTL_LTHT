@@ -17,8 +17,8 @@ INCLUDE lib1.asm
 @MOVEF$qv PROC
              push       AX
              push       BX
-    ;  push       CX
-    ;  push       DX
+             push       CX
+             push       DX
              mov        ax,@data
              mov        ds,ax
     LTM0:    
@@ -42,17 +42,16 @@ INCLUDE lib1.asm
              jne        ThoatTTM         ; Không phải 'c' thì nhảy đế Thoat_TM,
              jmp        LTM0             ; còn đúng là 'c' thì nhảy về LTM0
     ThoatTTM:
-    ;  mov        ah,4ch           ; Về DOS
-    ;  pop        DX
-    ;  pop        CX
-             mov        ah, 00h
-             mov        al,02
-             int        10h
+             mov        ah,4ch           ; Về DOS
+             pop        DX
+             pop        CX
+    ;  mov        ah, 00h
+    ;  mov        al,02
+    ;  int        10h
     ;  mov        ah, 4bh
     ;  int        21h
              pop        BX
              pop        AX
-            
              ret
              INCLUDE    lib3.asm         ; lib3.asm chứa CT con GET_DIR_NAME
 @MOVEF$qv ENDP
