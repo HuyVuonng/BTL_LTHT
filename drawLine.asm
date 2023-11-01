@@ -11,11 +11,8 @@
 @DRAW$qv PROC
                 mov    ax, @data
                 mov    ds, ax
-    ; push   CX
-                push   bx            ;
+                push   bx dx         ;
                 push   ax
-                
-              
     ; Draw
     ; setup
                 mov    ah,0          ; set video mode
@@ -61,19 +58,12 @@
                 int    21h
                 
                 mov    ah, 00h
-                mov    al,02
+                mov    al,03
                 int    10h
-                mov    ah, 4dh
-                int    21h
-    ; call Clear
-                
-    ;   Return to DOs
-              
-    ; mov    ah, 4ch
-    ; int    21h
-    ; pop    CX
-                pop    bx            ;
+
+                pop    bx dx         ;
                 pop    ax
+
                 ret
 @DRAW$qv ENDP
 end CONTAINER
