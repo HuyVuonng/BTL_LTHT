@@ -20,8 +20,8 @@ include LIB1.asm
 @TimMin$qv PROC
           mov        ax,@data       ;dua phan dia chi segment cua vung nho
           mov        ds,ax          ; cap phat cho bien vao DS
-          push       bx             ;
-          push       ax
+     ; push       bx             ;
+     ; push       ax
      L0:  
           CLRSCR                    ;    xoa man hinh
           HienString M1             ; hien xau M1
@@ -79,11 +79,9 @@ include LIB1.asm
           jmp        L0
   
      exit:
-          pop        bx             ;
-          pop        ax
+     ; pop        bx             ;
+     ; pop        ax
           ret
           include    LIB2.asm
 @TimMin$qv ENDP
 end PS
-           
-           

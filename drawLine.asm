@@ -11,8 +11,8 @@
 @DRAW$qv PROC
                 mov    ax, @data
                 mov    ds, ax
-                push   bx dx         ;
-                push   ax
+    ; push   bx dx         ;
+    ; push   ax
     ; Draw
     ; setup
                 mov    ah,0          ; set video mode
@@ -61,8 +61,8 @@
                 mov    al,03
                 int    10h
 
-                pop    bx dx         ;
-                pop    ax
+    ; pop    bx dx         ;
+    ; pop    ax
 
                 ret
 @DRAW$qv ENDP

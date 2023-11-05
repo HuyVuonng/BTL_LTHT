@@ -17,13 +17,11 @@ INCLUDE lib1.asm
 @MOVEF$qv PROC
              mov        ax,@data
              mov        ds,ax
-             push       bx               ;
-             push       ax
-             push       CX
+    ;  push       bx ax cx         ;
     LTM0:    
-             xor        bx, bx
-             xor        ax, ax
-             xor        cx, cx
+    ;  xor        bx, bx
+    ;  xor        ax, ax
+    ;  xor        cx, cx
              CLRSCR
              HienString tm               ; Hiện thông báo tm
              lea        dx,buff          ; Vào tên thư mục cần tạo
@@ -44,9 +42,7 @@ INCLUDE lib1.asm
              jne        ThoatTTM         ; Không phải 'c' thì nhảy đế Thoat_TM,
              jmp        LTM0             ; còn đúng là 'c' thì nhảy về LTM0
     ThoatTTM:
-             pop        CX
-             pop        bx               ;
-             pop        ax
+    ;  pop        CX bx ax
              ret
              INCLUDE    lib3.asm         ; lib3.asm chứa CT con GET_DIR_NAME
 @MOVEF$qv ENDP
